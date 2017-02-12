@@ -22,12 +22,14 @@ public class Throttle implements Filter {
 	// private client;
 	// private session;
 	// private timeOfLastRequest;
+	private long lastAccessedTime;
 
 	/**
 	 * Default constructor.
 	 */
 	public Throttle() {
 		// TODO Auto-generated constructor stub
+		lastAccessedTime = 0;
 	}
 
 	/**
@@ -52,14 +54,14 @@ public class Throttle implements Filter {
 		
 		long time_since = 	session.getSession().getLastAccessedTime();
 		
-		System.out.println(time_since);
+		//System.out.println(time_since);
 		
-		if(time_since < 5){
+		if(time_since - lastAccessedTime < 5000){
 			request.getRequestDispatcher("/Throttle.jspx").forward(request, response);
 		}else{
 			chain.doFilter(request, response);
 		}
-		
+		lastAccessedTime = time_since;
 	}
 
 	/**
