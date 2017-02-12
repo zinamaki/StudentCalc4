@@ -52,6 +52,13 @@ public class Throttle implements Filter {
 
 		// check if they have made a request within 5000ms (or 5 seconds)
 
+		boolean enable = false;
+		
+		if(!enable){
+			chain.doFilter(request, response);
+			return;
+		}
+		
 		if (current_time - last_time < 5000) {
 
 			// if they have made a request within 5 seconds, then send them to
