@@ -14,14 +14,14 @@
 </head>
 <body>
 
-<FORM action="" method="POST" onsubmit="return validate();">
+<FORM action="" onsubmit="return validate();" method="POST" >
 	<fieldset>
 		<legend>Student Loan Application</legend>
 		<font color="red">${errorMessage}</font>
 		<LABEL for="principal">Principal (total loan amount after studies)</LABEL>
-		<input type="text" name="inputPrincipal" value="${principal}"></input><br/>
+		<input type="text" name="inputPrincipal" id="principal" value="${principal}"></input><br/>
 		<LABEL for="interest">Annual Interest Rate</LABEL>
-		<input type="text" name="inputInterest" value="${interest}"></input><br/>
+		<input type="text" name="inputInterest" id = "interest" value="${interest}"></input><br/>
 		<LABEL for="period">Payment Period (total number of months)</LABEL>
 		<input type="text" name="inputPeriod" value="${period}"></input><br/>
 		<LABEL for="grace">Grace Period (take advantage of 6 month grace period and include grace period interest with your loan balance)</LABEL>

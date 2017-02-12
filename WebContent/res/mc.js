@@ -1,8 +1,9 @@
 /**
- * This javascript file is used to validate the formd data
+ * This javascript file is used to validate the form data
  */
 
 function validate() {
+	
 	var ok = true;
 	var p = document.getElementById("principal").value;
 	if (isNaN(p) || p <= 0) {
