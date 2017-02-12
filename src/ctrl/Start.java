@@ -173,6 +173,7 @@ public class Start extends HttpServlet {
 	private void serveJSP(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
 		String target = "/UI.jspx";
 		String submitParameter = request.getParameter("submit");
 
