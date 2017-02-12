@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class MaxPrincipal implements ServletContextAttributeListener {
 
-	private double max_principal;
+	private static double max_principal;
 
 	/**
 	 * Default constructor.
@@ -76,8 +76,8 @@ public class MaxPrincipal implements ServletContextAttributeListener {
 		}
 	}
 
-	public double getMaxPrincipal() {
-		return this.max_principal;
+	public static double getMaxPrincipal() {
+		return max_principal;
 	}
 
 }
