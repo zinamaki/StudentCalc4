@@ -22,7 +22,8 @@ public class Throttle implements Filter {
 	/**
 	 * Default constructor.
 	 */
-	public Throttle() {}
+	public Throttle() {
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -33,24 +34,37 @@ public class Throttle implements Filter {
 
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 * 
+	 *      This method checks if the user has made a request in the last 5
+	 *      seconds, if they have, then send them to the throttling page, if
+	 *      they have not then take them to the requested page
+	 * 
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		
+
 		// cast to an HttpServletRequest in order to get the session
-		
+
 		HttpServletRequest session = (HttpServletRequest) request;
-		
-		long last_time = 	session.getSession().getLastAccessedTime();
+
+		long last_time = session.getSession().getLastAccessedTime();
 		long current_time = System.currentTimeMillis();
-		
-		if(current_time - last_time < 5000){
-			System.out.println(current_time - last_time);
+
+		// check if they have made a request within 5000ms (or 5 seconds)
+
+		if (current_time - last_time < 5000) {
+
+			// if they have made a request within 5 seconds, then send them to
+			// the throttle page
+
 			request.getRequestDispatcher("/Throttle.jspx").forward(request, response);
-		}else{
+		} else {
+			// if they have not made a request within 5 seconds, then process
+			// their request
+
 			chain.doFilter(request, response);
 		}
-		
+
 	}
 
 	/**
