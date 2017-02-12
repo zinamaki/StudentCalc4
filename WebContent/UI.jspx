@@ -9,11 +9,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/mc.js">;</script>
 <title>Insert Parameters</title>
 </head>
 <body>
 
-<FORM action="" method="POST">
+<FORM action="" method="POST" onsubmit="return validate();">
 	<fieldset>
 		<legend>Student Loan Application</legend>
 		<font color="red">${errorMessage}</font>
