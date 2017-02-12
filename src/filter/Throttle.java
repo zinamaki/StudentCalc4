@@ -19,18 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 		"Start" })
 public class Throttle implements Filter {
 
-	// private client;
-	// private session;
-	// private timeOfLastRequest;
-	private long lastAccessedTime;
-
 	/**
 	 * Default constructor.
 	 */
-	public Throttle() {
-		// TODO Auto-generated constructor stub
-		lastAccessedTime = 0;
-	}
+	public Throttle() {}
 
 	/**
 	 * @see Filter#destroy()
@@ -44,24 +36,21 @@ public class Throttle implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-
-		// implement the logic that check the visit interval.. //note that you
-		// can check the time of the last visit..
+		
+		// cast to an HttpServletRequest in order to get the session
 		
 		HttpServletRequest session = (HttpServletRequest) request;
 		
-		long time_since = 	session.getSession().getLastAccessedTime();
+		long last_time = 	session.getSession().getLastAccessedTime();
+		long current_time = System.currentTimeMillis();
 		
-		//System.out.println(time_since);
-		
-		if(time_since - lastAccessedTime < 5000){
+		if(current_time - last_time < 5000){
+			System.out.println(current_time - last_time);
 			request.getRequestDispatcher("/Throttle.jspx").forward(request, response);
 		}else{
 			chain.doFilter(request, response);
 		}
-		lastAccessedTime = time_since;
+		
 	}
 
 	/**
