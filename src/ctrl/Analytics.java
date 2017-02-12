@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Analytics extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private static final String	MAX_PRINCIPAL = "maxPrincipal";
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,7 +32,9 @@ public class Analytics extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.getWriter().append("Current max principal is: " + listener.MaxPrincipal.getMaxPrincipal());
 		
+		this.getServletContext().setAttribute(MAX_PRINCIPAL, listener.MaxPrincipal.getMaxPrincipal());
 		
+		request.getRequestDispatcher("/MaxPrincipal.jspx").forward(request, response);
 	}
 
 	/**
